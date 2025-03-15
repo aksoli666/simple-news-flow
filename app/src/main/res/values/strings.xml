@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">SimpleNewsFlow</string>
+    <string name="app_name">Simple News</string>
+
+    <string name="simple">simple</string>
 </resources>
