@@ -1,47 +1,31 @@
 package com.example.simplenewsflow
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.simplenewsflow.ui.theme.SimpleNewsFlowTheme
+import android.os.Handler
+import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.example.simplenewsflow.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    private var _binding: ActivityMainBinding? = null
+    private val mBinding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            SimpleNewsFlowTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(R.layout.fragment_splash)
+        Handler(Looper.myLooper()!!).postDelayed({
+            setContentView(mBinding.root)
+            mBinding.bottomNavMenu.setupWithNavController(
+                navController = mBinding.navHostFragment.findNavController()
+            )
+        }, 5000)
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SimpleNewsFlowTheme {
-        Greeting("Android")
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
