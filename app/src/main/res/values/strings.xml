@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Simple News</string>
-
+    <string name="app_name">News Flow</string>
     <string name="simple">simple</string>
+    <string name="edit_text">find about...</string>
 </resources>

@@ -10,4 +10,6 @@
 
     <color name="grey">#F2F2F2</color>
     <color name="indigo">#5856D6</color>
+    <color name="dark_purple">#28278C</color>
+    <color name="light_purple">#6A68EA</color>
 </resources>
