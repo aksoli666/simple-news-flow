@@ -12,4 +12,5 @@
     <color name="indigo">#5856D6</color>
     <color name="dark_purple">#28278C</color>
     <color name="light_purple">#6A68EA</color>
+    <color name="tertiary">#B3B3B3</color>
 </resources>

@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.simplenewsflow.R
 import com.example.simplenewsflow.databinding.FragmentMainBinding
-import com.example.simplenewsflow.design.adapter.NewsAdapter
+import com.example.simplenewsflow.design.adapter.NewsByKeywordAdapter
 import com.example.simplenewsflow.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -25,24 +27,29 @@ class MainFragment : Fragment() {
     private val mBinding get() = _binding!!
 
     private val viewModel by viewModels<SearchViewModel>()
-    lateinit var newsAdapter: NewsAdapter
+    lateinit var newsByKeywordAdapter: NewsByKeywordAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        setupSearch()
+        setupCategoryNav()
+    }
+
+    private fun setupSearch() {
         var job: Job? = null
         mBinding.edSearch.addTextChangedListener{text: Editable? ->
             job?.cancel()
             job = MainScope().launch {
-                delay(500L)
+                delay(100L)
                 text?.let {
                     if(it.toString().isNotEmpty()) {
                         viewModel.searchNewsByKeyword(query = it.toString())
@@ -55,7 +62,7 @@ class MainFragment : Fragment() {
                 is Resource.Success -> {
                     mBinding.pagSearchProgressBar.visibility = View.INVISIBLE
                     response.data?.let {
-                        newsAdapter.differ.submitList(it.articles)
+                        newsByKeywordAdapter.differ.submitList(it.articles)
                     }
                 }
                 is Resource.Error -> {
@@ -71,10 +78,17 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun setupCategoryNav() {
+        mBinding.categoriesIcon.setOnClickListener {
+            findNavController().navigate(R.id
+                .action_mainFragment_to_categoryFragment)
+        }
+    }
+
     private fun initAdapter() {
-        newsAdapter = NewsAdapter()
+        newsByKeywordAdapter = NewsByKeywordAdapter()
         mBinding.searchNewsAdapter.apply {
-            adapter = newsAdapter
+            adapter = newsByKeywordAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }

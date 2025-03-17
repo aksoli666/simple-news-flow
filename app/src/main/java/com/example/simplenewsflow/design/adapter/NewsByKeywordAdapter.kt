@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simplenewsflow.R
 import com.example.simplenewsflow.model.Article
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsByKeywordAdapter : RecyclerView.Adapter<NewsByKeywordAdapter.NewsViewHolder>() {
 
     inner class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val articleTitle: TextView = view.findViewById(R.id.article_title)
@@ -53,8 +53,4 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     }
 
     private var onItemClickListener: ((Article) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (Article) -> Unit) {
-        onItemClickListener = listener
-    }
 }

@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 abstract class NewsDb: RoomDatabase() {
-    abstract fun getNewsRepository(): NewsDao
 
     companion object {
         @Volatile
