@@ -1,6 +1,6 @@
 package com.example.simplenewsflow.model
 
-data class Source(
+data class SourceByCategory(
     val category: String,
     val country: String,
     val description: String,

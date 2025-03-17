@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Simple News</string>
-
+    <string name="app_name">News Flow</string>
     <string name="simple">simple</string>
+    <string name="edit_text">find about...</string>
+    <string name="category_title">News by Categories</string>
+    <string name="list_categories">business\u00A0\u00A0\u00A0entertainment\u00A0\u00A0\u00A0general\u00A0\u00A0\u00A0health\u00A0\u00A0\u00A0science\u00A0\u00A0\u00A0sports\u00A0\u00A0\u00A0technology</string>
 </resources>
